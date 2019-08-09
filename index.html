@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>可愛翻牌小遊戲</title>
+    <link rel="shortcut icon" type="image/jpg" href="icon.jpg">
+
+    <style>
+        body {
+            background-image: url(back.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #divLeft {
+            position: fixed;
+            width: 45%;
+            padding-top: 50px;
+            /* overflow: hidden; */
+        }
+
+        #cardTab {
+            border-collapse: collapse;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        img {
+            border-radius: 7.5px;
+        }
+
+        #cardBtn {
+            background-color: black;
+            width: 200px;
+            height: 35px;
+            border-radius: 7.5px;
+            font-family: Microsoft JhengHei;
+            font-size: 20px;
+        }
+
+        #divRight {
+            width: 55%;
+            left: 55%;
+            margin-top: 100px;
+            position: fixed;
+            /* overflow: hidden; */
+        }
+
+        #divEnd {
+            background-color: whitesmoke;
+            position: fixed;
+            width: 45%;
+            right: 75px;
+            height: 300px;
+            bottom: 100px;
+            border-radius: 7.5px;
+            text-align: center;
+            font-family: Microsoft JhengHei;
+            /* overflow: hidden; */
+        }
+
+
+        #startTxt {
+            position: absolute;
+            font-family: Microsoft JhengHei;
+            width: 45%;
+            text-align: center;
+            top: 35%;
+        }
+
+        #endTxt {
+            position: absolute;
+            font-family: Microsoft JhengHei;
+            width: 45%;
+            text-align: center;
+            top: 35%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="divLeft">
+        <div id="divTab">
+            <center>
+                <table id="cardTab" width="400px">
+                    <tr height="140px">
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                    </tr>
+                    <tr height="140px">
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                    </tr>
+                    <tr height="140px">
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                        <td width="100px"> <img id="" src="" onclick="cardClick(this)" alt=""
+                                style="visibility: visible">
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <button id="cardBtn">
+                    <font color="white" onclick="btnClick()">開始遊戲&重新開始</font>
+                </button>
+                <br>
+            </center>
+        </div>
+    </div>
+
+
+    <div id="divRight">
+        <div id="divEnd">
+            <h1>遊戲規則</h1>
+            <h2>畫面中總共有12張牌</h2>
+            <h2>請點選任一張牌記住數字後再點選第二張</h2>
+            <h2>兩張牌相同的話就會消失</h2>
+            <h2>如果兩張牌不相同則會翻回背面</h2>
+        </div>
+    </div>
+
+
+    <div id="startTxt">
+        <h1>請點擊按鈕開始遊戲</h1>
+    </div>
+
+    <div id="endTxt" style="visibility: hidden">
+        <h1>遊戲結束</h1>
+    </div>
+
+
+    <script>
+        var cardArr_00 = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ];
+
+        function btnClick() {
+
+            document.getElementById("startTxt").style.visibility = "hidden";
+            document.getElementById("endTxt").style.visibility = "hidden";
+
+            var cardArr_01 = [];
+
+            for (var k = 0; k < 6; k++) {
+                cardArr_01[k] = 0;
+            }
+            console.log(cardArr_01);
+            console.log("++++++++++");
+
+            for (var i = 0; i < cardArr_00.length; i++) {
+                for (var j = 0; j < cardArr_00[i].length; j++) {
+                    var cardNum
+                    do {
+                        cardNum = Math.floor(Math.random() * 6 + 1); // 取亂數
+                        console.log(cardNum);
+                        console.log(cardArr_01[cardNum - 1]);
+                        console.log("----------");
+                    } while (cardArr_01[cardNum - 1] >= 2);
+                    console.log("==========");
+                    cardArr_01[cardNum - 1]++;
+                    cardArr_00[i][j] = cardNum;
+                }
+            }
+            console.log(cardArr_00);
+            console.log("----------");
+
+            var cardBox = document.getElementById("cardTab");
+
+            for (var i = 0; i < cardArr_00.length; i++) {
+                for (var j = 0; j < cardArr_00[i].length; j++) {
+                    cardBox.rows[i].cells[j].innerHTML = '<img id=' + `card${i+1}${j+1}` +
+                        ' src="0.png" onclick="cardClick(this)" alt=' +
+                        `${cardArr_00[i][j].toString()}` + ' style="visibility: visible">';
+                }
+            }
+
+            console.log(cardArr_00);
+
+        }
+
+        var cardOne = 0; // 第一次
+        var cardTwo = 0; // 第二次
+        var cardImg_01;
+        var cardTot = 12;
+
+        function cardClick(cardImg) {
+            if (cardOne == 0) {
+                cardOne = cardImg.alt;
+                cardImg.src = `${cardOne.toString()}.png`;
+                cardImg_01 = cardImg;
+                console.log(cardOne);
+                console.log("~~~~~~~~~~");
+            } else if (cardOne != 0 && cardTwo == 0) {
+                // console.log(cardImg_01.id);
+                // console.log(cardImg.id);
+
+                if (cardImg_01.id == cardImg.id) {
+                    return;
+                }
+
+                cardTwo = cardImg.alt;
+                cardImg.src = `${cardTwo.toString()}.png`;
+                console.log(cardTwo);
+                console.log("**********");
+
+                if (cardOne == cardTwo) {
+
+                    setTimeout(function () {
+                        cardImg.style.visibility = "hidden";
+                        cardImg_01.style.visibility = "hidden";
+                    }, 250);
+                    cardOne = 0;
+                    cardTwo = 0;
+                    console.log("----------");
+                    cardTot = cardTot - 2;
+                    if (cardTot == 0) {
+                        setTimeout(function () {
+                            document.getElementById("endTxt").style.visibility = "visible";
+                            // alert("遊戲結束");
+                        }, 500);
+                    }
+
+                } else if (cardOne != cardTwo) {
+
+                    setTimeout(function () {
+                        cardImg.src = "0.png";
+                        cardImg_01.src = "0.png";
+                    }, 250);
+                    cardOne = 0;
+                    cardTwo = 0;
+                    console.log("----------");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
